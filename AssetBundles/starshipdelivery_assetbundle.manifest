@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 705107964
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 87e4bf4d0f7805de8181919acbe5ab8f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d093761738ba1bf8a6d5cff5da6e8997
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 87e4bf4d0f7805de8181919acbe5ab8f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Models/StarshipModel_Game.blend
+- Assets/Materials/StarshipMaterial.mat
+- Assets/Prefabs/StarshipModel.prefab
+Dependencies: []
