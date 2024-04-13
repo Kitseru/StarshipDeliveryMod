@@ -7,3 +7,4 @@ C:\Users\Valentin\Documents\Projets\Modding\LethalCompany\StarshipDeliveryMod\St
 C:\Users\Valentin\Documents\Projets\Modding\LethalCompany\StarshipDeliveryMod\StarshipDeliveryMod\obj\Debug\netstandard2.1\StarshipDeliveryMod.AssemblyInfo.cs
 C:\Users\Valentin\Documents\Projets\Modding\LethalCompany\StarshipDeliveryMod\StarshipDeliveryMod\obj\Debug\netstandard2.1\StarshipDeliveryMod.csproj.CoreCompileInputs.cache
 C:\Users\Valentin\Documents\Projets\Modding\LethalCompany\StarshipDeliveryMod\StarshipDeliveryMod\obj\Debug\netstandard2.1\Laventin.StarshipDeliveryMod.dll
+C:\Users\Valentin\Documents\Projets\Modding\LethalCompany\StarshipDeliveryMod\StarshipDeliveryMod\obj\Debug\netstandard2.1\StarshipDeliveryMod.sourcelink.json

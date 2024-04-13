@@ -20,14 +20,14 @@ namespace StarshipDeliveryMod
         private const string modName = "StarshipDelivery";
         private const string modVersion = "0.0.1";
 
-        private readonly Harmony harmony = new Harmony(modGUID);
+        private readonly Harmony harmony = new(modGUID);
 
-        internal static StarshipDelivery Instance = new StarshipDelivery();
+        internal static StarshipDelivery Instance = null!;
 
-        internal static ManualLogSource? mls;
-        internal DeliveryGUI dGUI = new DeliveryGUI();
+        internal static ManualLogSource mls = null!;
+        internal DeliveryUI deliveryUI = null!;
 
-        public static AssetBundle? Ressources;
+        public static AssetBundle Ressources = null!;
 
 
         void Awake()
@@ -38,7 +38,7 @@ namespace StarshipDeliveryMod
             }
 
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-            mls.LogInfo("Starhip Delivery Mod has awaken OMG !!!!!!!!!!!");
+            mls.LogInfo("Starhip Delivery Mod loaded");
 
             string currentAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -47,23 +47,19 @@ namespace StarshipDeliveryMod
                 mls.LogError("Failed to load custom assets.");
                 return;
             }
-            else
-            {
-                mls.LogInfo("Asset Bundle : " + Ressources.ToString() + " Loaded Successifully");
-            }
 
-            //harmony.PatchAll(typeof(StarshipDeliveryModBase));
             harmony.PatchAll(typeof(ItemDropshipPatch));
-            harmony.PatchAll(typeof(MenuManagerPatch));
 
             mls = Logger;
+        }
 
-            var deliveryGUI_GO = new UnityEngine.GameObject("DeliveryGUI");
-            UnityEngine.Object.DontDestroyOnLoad(deliveryGUI_GO);
-            deliveryGUI_GO.hideFlags = HideFlags.HideAndDontSave;
-            deliveryGUI_GO.AddComponent<DeliveryGUI>();
-            dGUI = (DeliveryGUI)deliveryGUI_GO.GetComponent<DeliveryGUI>();
-            mls.LogInfo("deliveryGUI Instance created : " + deliveryGUI_GO.name);
+        public static void CreateDeliveryUI(ItemDropship _itemDropship)
+        {
+            var deliveryUI_GO = new GameObject("DeliveryUI");
+            deliveryUI_GO.hideFlags = HideFlags.HideAndDontSave;
+            DeliveryUI deliveryUI = deliveryUI_GO.AddComponent<DeliveryUI>();
+            deliveryUI.itemDropship = _itemDropship;
+            mls.LogInfo("DeliveryUI Instance created : " + deliveryUI_GO.name);
         }
     }
 
