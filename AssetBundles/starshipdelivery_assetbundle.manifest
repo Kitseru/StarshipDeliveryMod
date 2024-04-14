@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3611320137
+CRC: 1673117851
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 607a3d7bf837d2cd1714b45921581825
+    Hash: 4d23de66699c97b179153413dd58b80a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 430f4153d6a3d559acad52a193d0b98b
+    Hash: a19479944fd3f5971e06489d02b2241a
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 607a3d7bf837d2cd1714b45921581825
+    Hash: 4d23de66699c97b179153413dd58b80a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,9 +30,21 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 64
   Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
-SerializeReferenceClassIdentifiers: []
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.RenderPipelines.HighDefinition.Runtime
+  ClassName: UnityEngine.Rendering.HighDefinition.BoolScalableSettingValue
+- AssemblyName: Unity.RenderPipelines.HighDefinition.Runtime
+  ClassName: UnityEngine.Rendering.HighDefinition.IntScalableSettingValue
 Assets:
 - Assets/AnimationClip/ItemShipOpenDoors.anim
 - Assets/AnimationClip/ItemShipLand.anim

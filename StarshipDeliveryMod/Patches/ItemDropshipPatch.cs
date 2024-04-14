@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -13,12 +14,39 @@ namespace StarshipDeliveryMod.Patches
     [HarmonyPatch(typeof(ItemDropship))]
     internal class ItemDropshipPatch
     { 
+
         [HarmonyPatch("Start")]
         [HarmonyPostfix]
         public static void StartPatch(ref ItemDropship __instance)
         {
             StarshipReplacement.ReplaceStarshipModel(__instance.gameObject);
+
+            Transform[] spawnPositions = __instance.transform.Find("ItemSpawnPositions").GetComponentsInChildren<Transform>();
+
             CreateDeliveryUI(__instance);
+        }
+
+        [HarmonyPatch("OpenShipDoorsOnServer")]
+        [HarmonyPrefix]
+        public static void OpenShipDoorsOnServerPatch(ref ItemDropship __instance, ref bool ___shipLanded, ref bool ___shipDoorsOpened, ref List<int> ___itemsToDeliver, ref Terminal ___terminalScript, ref StartOfRound ___playersManager, ref Transform[] ___itemSpawnPositions)
+        {
+            if (___shipLanded && !___shipDoorsOpened)
+            {
+                int num = 0;
+                for (int i = 0; i < ___itemsToDeliver.Count; i++)
+                {
+                    GameObject obj = UnityEngine.Object.Instantiate(___terminalScript.buyableItemsList[___itemsToDeliver[i]].spawnPrefab, ___itemSpawnPositions[num].position, Quaternion.identity, ___playersManager.propsContainer);
+                    GrabbableObject grabbableObject = obj.GetComponent<GrabbableObject>();
+                    grabbableObject.fallTime = 1f;
+                    grabbableObject.hasHitGround = true;
+                    grabbableObject.reachedFloorTarget = true;
+			        grabbableObject.targetFloorPosition = grabbableObject.transform.localPosition;
+                    obj.GetComponent<NetworkObject>().Spawn();
+                    num = ((num < 3) ? (num + 1) : 0);
+                }
+                ___itemsToDeliver.Clear();
+                __instance.OpenShipClientRpc();
+            }
         }
 
         static void CreateDeliveryUI(ItemDropship _itemDropship)

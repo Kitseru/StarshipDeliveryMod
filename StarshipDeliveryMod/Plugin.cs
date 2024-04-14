@@ -48,6 +48,8 @@ namespace StarshipDeliveryMod
             }
 
             harmony.PatchAll(typeof(ItemDropshipPatch));
+            harmony.PatchAll(typeof(StartOfRoundPatch));
+            //harmony.PatchAll(typeof(GrabbableObjectPatch));
 
             mls = Logger;
         }
