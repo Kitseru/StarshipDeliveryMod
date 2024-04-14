@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 705107964
+CRC: 3611320137
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 87e4bf4d0f7805de8181919acbe5ab8f
+    Hash: 607a3d7bf837d2cd1714b45921581825
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d093761738ba1bf8a6d5cff5da6e8997
+    Hash: 430f4153d6a3d559acad52a193d0b98b
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 87e4bf4d0f7805de8181919acbe5ab8f
+    Hash: 607a3d7bf837d2cd1714b45921581825
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,9 +30,15 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 64
   Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/AnimationClip/ItemShipOpenDoors.anim
+- Assets/AnimationClip/ItemShipLand.anim
 - Assets/Models/StarshipModel_Game.blend
+- Assets/AnimationClip/ItemShipLeave.anim
 - Assets/Materials/StarshipMaterial.mat
+- Assets/AnimationClip/ItemShipIdleGone.anim
 - Assets/Prefabs/StarshipModel.prefab
 Dependencies: []

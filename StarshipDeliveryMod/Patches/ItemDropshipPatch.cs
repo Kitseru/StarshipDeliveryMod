@@ -12,13 +12,22 @@ namespace StarshipDeliveryMod.Patches
 {
     [HarmonyPatch(typeof(ItemDropship))]
     internal class ItemDropshipPatch
-    {
+    { 
         [HarmonyPatch("Start")]
         [HarmonyPostfix]
         public static void StartPatch(ref ItemDropship __instance)
         {
             StarshipReplacement.ReplaceStarshipModel(__instance.gameObject);
-            StarshipDelivery.CreateDeliveryUI(__instance);
+            CreateDeliveryUI(__instance);
+        }
+
+        static void CreateDeliveryUI(ItemDropship _itemDropship)
+        {
+            GameObject deliveryUI_GO = new GameObject("DeliveryUI");
+            deliveryUI_GO.hideFlags = HideFlags.HideAndDontSave;
+            DeliveryUI deliveryUI = deliveryUI_GO.AddComponent<DeliveryUI>();
+            deliveryUI.itemDropship = _itemDropship;
+            StarshipDelivery.mls.LogInfo("DeliveryUI Instance created : " + deliveryUI_GO.name);
         }
     }
 }

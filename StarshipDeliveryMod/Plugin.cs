@@ -25,7 +25,6 @@ namespace StarshipDeliveryMod
         internal static StarshipDelivery Instance = null!;
 
         internal static ManualLogSource mls = null!;
-        internal DeliveryUI deliveryUI = null!;
 
         public static AssetBundle Ressources = null!;
 
@@ -51,15 +50,6 @@ namespace StarshipDeliveryMod
             harmony.PatchAll(typeof(ItemDropshipPatch));
 
             mls = Logger;
-        }
-
-        public static void CreateDeliveryUI(ItemDropship _itemDropship)
-        {
-            var deliveryUI_GO = new GameObject("DeliveryUI");
-            deliveryUI_GO.hideFlags = HideFlags.HideAndDontSave;
-            DeliveryUI deliveryUI = deliveryUI_GO.AddComponent<DeliveryUI>();
-            deliveryUI.itemDropship = _itemDropship;
-            mls.LogInfo("DeliveryUI Instance created : " + deliveryUI_GO.name);
         }
     }
 
