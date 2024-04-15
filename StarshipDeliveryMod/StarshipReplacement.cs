@@ -29,11 +29,6 @@ namespace StarshipDeliveryMod
             newShipObject.transform.localRotation = Quaternion.Euler(180, 90, 90);
             newShipObject.transform.localScale = new Vector3(2, 2, 2);
 
-            //Change Animation Clips
-            ReplaceStarshipAnimations(_droneShip);
-            Animator shipAnimator = _droneShip.GetComponent<Animator>();
-            RuntimeAnimatorController animatorController = shipAnimator.runtimeAnimatorController;
-
             //Move Item Spawn Positions
             Transform[] spawnPositions = new Transform[_droneShip.transform.Find("ItemSpawnPositions").childCount];
             for (int i = 0; i < spawnPositions.Length; i++)
@@ -51,6 +46,19 @@ namespace StarshipDeliveryMod
             //Set shipBody "Collider" layer to work with Items Falling detection
             newShipObject.transform.Find("ShipBody").gameObject.layer = LayerMask.NameToLayer("Default");
 
+            //Initialize ParticleSystems
+            GameObject landingFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshiplandingfx.prefab");
+            GameObject liftoff = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipliftofffx.prefab");
+            Transform landingPos = _droneShip.transform.GetParent().Find("ItemShipLandingPosition").transform;
+            StarshipDelivery.mls.LogInfo("---------------------- Sibling Found : " + landingPos.name);
+
+            StarshipFX effect = _droneShip.AddComponent<StarshipFX>();
+            effect.InitFX(landingFx, liftoff, landingPos);
+
+            //Change Animation Clips
+            ReplaceStarshipAnimations(_droneShip);
+            Animator shipAnimator = _droneShip.GetComponent<Animator>();
+            RuntimeAnimatorController animatorController = shipAnimator.runtimeAnimatorController;
         }
 
         private static void ReplaceStarshipAnimations(GameObject _droneShip)
