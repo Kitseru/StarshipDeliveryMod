@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Laventin.StarshipDeliveryMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.1+43aee45fb40a95f0e7987a4dfc63747f6c2cd0bf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.1+cd7fd1c8797b87b821832564ebd56dbf0e7760a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("StarshipDelivery")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Laventin.StarshipDeliveryMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.0.1.0")]

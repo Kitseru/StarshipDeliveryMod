@@ -47,18 +47,34 @@ namespace StarshipDeliveryMod
             newShipObject.transform.Find("ShipBody").gameObject.layer = LayerMask.NameToLayer("Default");
 
             //Initialize ParticleSystems
+            GameObject plumeFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/plumetrail.prefab");
+            GameObject plumeFxGo = Instantiate<GameObject>(plumeFx, _droneShip.transform.position, Quaternion.identity, _droneShip.transform);
+            plumeFxGo.transform.name = "PlumeTrail";
+            plumeFxGo.transform.localPosition = new Vector3(0, 0, -7.1f);
+            plumeFxGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            plumeFxGo.transform.localScale = new Vector3(1, 1, 1);
+
+            GameObject reentryFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/reentryfx.prefab");
+            GameObject reentryFxGo = Instantiate<GameObject>(reentryFx, _droneShip.transform.position, Quaternion.identity, _droneShip.transform);
+            reentryFxGo.transform.name = "ReentryFX";
+            reentryFxGo.transform.localPosition = new Vector3(-10.06f, 0, 17.75f);
+            reentryFxGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            reentryFxGo.transform.localScale = new Vector3(20, 20, 20);
+
+            //Initialize ParticleSystems animation events
             GameObject landingFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshiplandingfx.prefab");
             GameObject liftoff = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipliftofffx.prefab");
             Transform landingPos = _droneShip.transform.GetParent().Find("ItemShipLandingPosition").transform;
-            StarshipDelivery.mls.LogInfo("---------------------- Sibling Found : " + landingPos.name);
 
-            StarshipFX effect = _droneShip.AddComponent<StarshipFX>();
+            StarshipFXEvents effect = _droneShip.AddComponent<StarshipFXEvents>();
             effect.InitFX(landingFx, liftoff, landingPos);
+
+            //Initialize BilboardSprites
+            _droneShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<BillboardSprite>();
+            _droneShip.transform.Find("ReentryFX/ReentryGlow").gameObject.AddComponent<BillboardSprite>();
 
             //Change Animation Clips
             ReplaceStarshipAnimations(_droneShip);
-            Animator shipAnimator = _droneShip.GetComponent<Animator>();
-            RuntimeAnimatorController animatorController = shipAnimator.runtimeAnimatorController;
         }
 
         private static void ReplaceStarshipAnimations(GameObject _droneShip)

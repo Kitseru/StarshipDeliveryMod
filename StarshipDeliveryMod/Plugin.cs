@@ -37,11 +37,11 @@ namespace StarshipDeliveryMod
             }
 
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-            mls.LogInfo("Starhip Delivery Mod loaded");
+            mls.LogInfo("Starship Delivery Mod loaded");
 
             string currentAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            Ressources = AssetBundle.LoadFromFile(Path.Combine(currentAssemblyLocation, "Ressources/starshipdelivery_assetbundle"));
+            Ressources = AssetBundle.LoadFromFile(Path.Combine(currentAssemblyLocation, "Ressources/starshipdelivery"));
             if (Ressources == null) {
                 mls.LogError("Failed to load custom assets.");
                 return;

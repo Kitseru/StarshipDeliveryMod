@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarshipFX : MonoBehaviour
+public class StarshipFXEvents : MonoBehaviour
 {
     private GameObject landingFxPrefab = null!;
     private GameObject liftoffFxPrefab = null!;
