@@ -11,7 +11,7 @@ public class BillboardSprite : MonoBehaviour
 
 	void Start()
     {
-        mainCamera = StartOfRoundPatch.currentCam;
+        mainCamera = StartOfRoundPatch.CurrentCam;
         StartOfRoundPatch.onCameraChange += UpdateCamera;
     }
 	void Update()

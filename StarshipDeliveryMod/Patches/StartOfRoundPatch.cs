@@ -14,21 +14,13 @@ namespace StarshipDeliveryMod.Patches
     public class StartOfRoundPatch
     {
         public static Action<Camera>? onCameraChange;
-        public static Camera? currentCam;
-
-/*         [HarmonyPatch("Awake")]
-        [HarmonyPostfix]
-        public static void AwakePatch(ref StartOfRound __instance)
-        {
-            __instance.gameObject.AddComponent<CustomRoundManager>();
-        } */
+        public static Camera? CurrentCam {get; private set;}
 
         [HarmonyPatch("SwitchCamera")]
         [HarmonyPostfix]
         public static void SwitchCameraPatch(ref StartOfRound __instance, ref Camera ___activeCamera)
         {
-            StarshipDelivery.mls.LogInfo("----------------------------------gameplay camera : " + ___activeCamera.name);
-            currentCam = ___activeCamera;
+            CurrentCam = ___activeCamera;
             onCameraChange?.Invoke(___activeCamera);
             ___activeCamera.farClipPlane = 5000;
         }

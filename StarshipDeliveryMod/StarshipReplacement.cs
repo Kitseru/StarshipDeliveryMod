@@ -16,10 +16,18 @@ namespace StarshipDeliveryMod
             }
 
             // Hide Original DroneShip
-            Renderer[] childRenderers = _droneShip.transform.GetChild(0).GetComponentsInChildren<Renderer>();
-            foreach(Renderer childRenderer in childRenderers)
+
+            StarshipDelivery.mls.LogInfo("Ship replacement has begun");
+            Transform[] children = _droneShip.transform.GetChild(0).GetComponentsInChildren<Transform>();
+            foreach(Transform child in children)
             {
-                childRenderer.enabled = false;
+                if (child.TryGetComponent<Renderer>(out Renderer renderer))
+                    renderer.enabled = false;
+                    StarshipDelivery.mls.LogInfo("Component Renderer from " + child.name + " disabled");
+
+                if (child.TryGetComponent<Light>(out Light light))
+                    light.enabled = false;
+                    StarshipDelivery.mls.LogInfo("Component Light from " + child.name + " disabled");
             }
 
             // Add Starship Prefab
@@ -66,12 +74,16 @@ namespace StarshipDeliveryMod
             GameObject liftoff = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipliftofffx.prefab");
             Transform landingPos = _droneShip.transform.GetParent().Find("ItemShipLandingPosition").transform;
 
-            StarshipFXEvents effect = _droneShip.AddComponent<StarshipFXEvents>();
+            StarshipAnimationEvents effect = _droneShip.AddComponent<StarshipAnimationEvents>();
             effect.InitFX(landingFx, liftoff, landingPos);
 
             //Initialize BilboardSprites
             _droneShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<BillboardSprite>();
             _droneShip.transform.Find("ReentryFX/ReentryGlow").gameObject.AddComponent<BillboardSprite>();
+
+            _droneShip.transform.Find("StarshipModel/Engine.000/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
+            _droneShip.transform.Find("StarshipModel/Engine.001/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
+            _droneShip.transform.Find("StarshipModel/Engine.002/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
 
             //Change Animation Clips
             ReplaceStarshipAnimations(_droneShip);
