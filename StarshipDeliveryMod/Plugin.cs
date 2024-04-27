@@ -39,7 +39,7 @@ namespace StarshipDeliveryMod
 
             string currentAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            Ressources = AssetBundle.LoadFromFile(Path.Combine(currentAssemblyLocation, "Ressources/starshipdelivery"));
+            Ressources = AssetBundle.LoadFromFile(Path.Combine(currentAssemblyLocation, "starshipdelivery"));
 
             if (Ressources == null) {
                 mls.LogError("Failed to load custom assets.");
