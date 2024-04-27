@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace StarshipDeliveryMod
 {
@@ -16,7 +17,6 @@ namespace StarshipDeliveryMod
             }
 
             // Hide Original DroneShip
-
             StarshipDelivery.mls.LogInfo("Ship replacement has begun");
             Transform[] children = _droneShip.transform.GetChild(0).GetComponentsInChildren<Transform>();
             foreach(Transform child in children)
@@ -51,9 +51,6 @@ namespace StarshipDeliveryMod
             _droneShip.transform.Find("ItemShip/Trigger").GetComponent<BoxCollider>().size = new Vector3(3f, 3f, 1f);
             _droneShip.transform.Find("ItemShip/KillTrigger").GetComponent<BoxCollider>().size = new Vector3(2.8f, 2.8f, 1f);
 
-            //Set shipBody "Collider" layer to work with Items Falling detection
-            newShipObject.transform.Find("ShipBody").gameObject.layer = LayerMask.NameToLayer("Default");
-
             //Initialize ParticleSystems
             GameObject plumeFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/plumetrail.prefab");
             GameObject plumeFxGo = Instantiate<GameObject>(plumeFx, _droneShip.transform.position, Quaternion.identity, _droneShip.transform);
@@ -85,6 +82,9 @@ namespace StarshipDeliveryMod
             _droneShip.transform.Find("StarshipModel/Engine.001/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
             _droneShip.transform.Find("StarshipModel/Engine.002/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
 
+            //Resize NavMeshObstacle
+            _droneShip.GetComponent<NavMeshObstacle>().size = new Vector3(8.5f, 8.5f, 6.46f);
+
             //Change Animation Clips
             ReplaceStarshipAnimations(_droneShip);
         }
@@ -101,6 +101,11 @@ namespace StarshipDeliveryMod
             animatorOverrideController["ItemShipOpenDoors"] = StarshipDelivery.Ressources.LoadAsset<AnimationClip>("assets/animationclip/itemshipopendoors.anim");
 
             shipAnimator.Rebind();
+        }
+
+        public static void AdjustShipPosition(string _level)
+        {
+            
         }
     }
 }

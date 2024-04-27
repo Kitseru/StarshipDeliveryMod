@@ -13,8 +13,16 @@ namespace StarshipDeliveryMod.Patches
     [HarmonyPatch(typeof(StartOfRound))]
     public class StartOfRoundPatch
     {
+        public static Action? onRoundStart;
         public static Action<Camera>? onCameraChange;
         public static Camera? CurrentCam {get; private set;}
+
+        [HarmonyPatch("Awake")]
+        [HarmonyPostfix]
+        public static void AwakePatch()
+        {
+            onRoundStart?.Invoke();
+        }
 
         [HarmonyPatch("SwitchCamera")]
         [HarmonyPostfix]
@@ -25,5 +33,4 @@ namespace StarshipDeliveryMod.Patches
             ___activeCamera.farClipPlane = 5000;
         }
     }
-    
 }

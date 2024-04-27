@@ -28,6 +28,7 @@ namespace StarshipDeliveryMod
 
         public static AssetBundle Ressources = null!;
 
+        public static string LevelDataConfig = null!;
 
         void Awake()
         {
@@ -42,17 +43,28 @@ namespace StarshipDeliveryMod
             string currentAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             Ressources = AssetBundle.LoadFromFile(Path.Combine(currentAssemblyLocation, "Ressources/starshipdelivery"));
+
             if (Ressources == null) {
                 mls.LogError("Failed to load custom assets.");
                 return;
             }
 
+            try
+            {
+                LevelDataConfig = File.ReadAllText(Path.Combine(currentAssemblyLocation, "ShipPositionConfig.json"));
+            }
+            catch
+            {
+                mls.LogError("Failed to load ShipPositionConfig.json");
+                return;
+            }
+
+            LevelDataManager.InitializeLevelDatas(LevelDataConfig);
+
             harmony.PatchAll(typeof(ItemDropshipPatch));
             harmony.PatchAll(typeof(StartOfRoundPatch));
-            //harmony.PatchAll(typeof(GrabbableObjectPatch));
 
             mls = Logger;
         }
     }
-
 }

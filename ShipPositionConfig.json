@@ -1,0 +1,160 @@
+{
+    "levelDatas" : [
+        {
+            "levelName":"CompanyBuilding",
+            "landingPosition": {
+                "x" : 33.8,
+                "y" : 0.74,
+                "z" : -111.62
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : -99.753
+            }
+        },
+        {
+            "levelName":"Level1Experimentation",
+            "landingPosition": {
+                "x" : -27.92,
+                "y" : 1.33,
+                "z" : -41.87
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : 29.599
+            }
+        },
+        {
+            "levelName":"Level2Assurance",
+            "landingPosition": {
+                "x" : 31.42,
+                "y" : 22.1,
+                "z" : -50.82
+            },
+            "landingRotation": {
+                "x" : -91.302,
+                "y" : 90.0,
+                "z" : -103.641
+            }
+        },
+        {
+            "levelName":"Level3Vow",
+            "landingPosition": {
+                "x" : 52.77,
+                "y" : 8.01,
+                "z" : -36.62
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 180,
+                "z" : -100.805
+            }
+        },
+        {
+            "levelName":"Level4March",
+            "landingPosition": {
+                "x" : 49.15,
+                "y" : 11.75,
+                "z" : -121.46
+            },
+            "landingRotation": {
+                "x" : -87.609,
+                "y" : -35.707,
+                "z" : -61.307
+            }
+        },
+        {
+            "levelName":"Level5Rend",
+            "landingPosition": {
+                "x" : 86.37,
+                "y" : 4.94,
+                "z" : -115.79
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : -183.716
+            }
+        },
+        {
+            "levelName":"Level6Dine",
+            "landingPosition": {
+                "x" : -8.12,
+                "y" : 0.6,
+                "z" : 2.15
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : 34.999
+            }
+        },
+        {
+            "levelName":"Level7Offense",
+            "landingPosition": {
+                "x" : 79.53,
+                "y" : 0.31,
+                "z" : -66.51
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : 76.388
+            }
+        },
+        {
+            "levelName":"Level8Titan",
+            "landingPosition": {
+                "x" : 27.5,
+                "y" : 2.65,
+                "z" : -95.41
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : -395.756
+            }
+        },
+        {
+            "levelName":"Level9Artifice",
+            "landingPosition": {
+                "x" : -2.72,
+                "y" : -2.92,
+                "z" : -121.16
+            },
+            "landingRotation": {
+                "x" : -92.998,
+                "y" : 53.196,
+                "z" : 0.0
+            }
+        },
+        {
+            "levelName":"Level10Adamance",
+            "landingPosition": {
+                "x" : -7.09,
+                "y" : 8.71,
+                "z" : -118.78
+            },
+            "landingRotation": {
+                "x" : -88.206,
+                "y" : -26.108,
+                "z" : 16.038
+            }
+        },
+        {
+            "levelName":"Level11Embrion",
+            "landingPosition": {
+                "x" : 55.11,
+                "y" : 2.06,
+                "z" : -53.68
+            },
+            "landingRotation": {
+                "x" : -90.0,
+                "y" : 0.0,
+                "z" : 89.542
+            }
+        }
+    ]
+}
