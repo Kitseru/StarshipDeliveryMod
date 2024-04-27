@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using BepInEx;
 using BepInEx.Logging;
@@ -18,7 +15,7 @@ namespace StarshipDeliveryMod
     {
         private const string modGUID = "Laventin.StarshipDeliveryMod";
         private const string modName = "StarshipDelivery";
-        private const string modVersion = "0.0.1";
+        private const string modVersion = "1.0.0";
 
         private readonly Harmony harmony = new(modGUID);
 

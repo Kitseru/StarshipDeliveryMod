@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 using StarshipDeliveryMod;
@@ -62,6 +61,7 @@ public class LevelDataManager
     }
 }
 
+//Class that uses Vector3 instead of x y and z position as individual floats
 public class LevelData_Unity
 {
     public string levelName;

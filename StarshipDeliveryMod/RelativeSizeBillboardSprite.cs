@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using StarshipDeliveryMod;
 using StarshipDeliveryMod.Patches;
 using UnityEngine;
 
-public class BillboardSprite : MonoBehaviour
+//Used to size the reentry flare sprite dynamically relative to camera distance
+public class RelativeSizeBillboardSprite : MonoBehaviour
 {
     public float sizeMultiplier = 0.003f;
     private Camera? mainCamera;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using StarshipDeliveryMod.Patches;
 using UnityEngine;
 
+//Used to make raptor plume sprites face the camera but only on the x and z axis
 public class AxisBillboardSprite : MonoBehaviour
 {
     private Camera? mainCamera;

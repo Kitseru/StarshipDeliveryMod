@@ -4,6 +4,7 @@ using StarshipDeliveryMod;
 using StarshipDeliveryMod.Patches;
 using UnityEngine;
 
+//Used to be called by the AnimationClips as AnimationEvents
 public class StarshipAnimationEvents : MonoBehaviour
 {
     private GameObject landingFxPrefab = null!;

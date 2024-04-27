@@ -1,13 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using HarmonyLib;
-using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace StarshipDeliveryMod.Patches
 {
@@ -26,7 +20,6 @@ namespace StarshipDeliveryMod.Patches
             StarshipDelivery.mls.LogInfo("current level : " + currentLevelDatas.levelName + " ------------> changing ship position and rotation to fit Starship size at : " + currentLevelDatas.landingPosition + " - " + currentLevelDatas.landingRotation);
 
             StarshipReplacement.ReplaceStarshipModel(__instance.gameObject);
-            Transform[] spawnPositions = __instance.transform.Find("ItemSpawnPositions").GetComponentsInChildren<Transform>();
         }
     }
 }

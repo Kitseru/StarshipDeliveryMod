@@ -10,12 +10,6 @@ namespace StarshipDeliveryMod
     {
         public static void ReplaceStarshipModel(GameObject _droneShip)
         {
-            if (StarshipDelivery.Ressources == null)
-            {
-                StarshipDelivery.mls.LogError(" Ressources = null");
-                return;
-            }
-
             // Hide Original DroneShip
             StarshipDelivery.mls.LogInfo("Ship replacement has begun");
             Transform[] children = _droneShip.transform.GetChild(0).GetComponentsInChildren<Transform>();
@@ -75,8 +69,8 @@ namespace StarshipDeliveryMod
             effect.InitFX(landingFx, liftoff, landingPos);
 
             //Initialize BilboardSprites
-            _droneShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<BillboardSprite>();
-            _droneShip.transform.Find("ReentryFX/ReentryGlow").gameObject.AddComponent<BillboardSprite>();
+            _droneShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<RelativeSizeBillboardSprite>();
+            _droneShip.transform.Find("ReentryFX/ReentryGlow").gameObject.AddComponent<RelativeSizeBillboardSprite>();
 
             _droneShip.transform.Find("StarshipModel/Engine.000/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
             _droneShip.transform.Find("StarshipModel/Engine.001/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
@@ -101,11 +95,6 @@ namespace StarshipDeliveryMod
             animatorOverrideController["ItemShipOpenDoors"] = StarshipDelivery.Ressources.LoadAsset<AnimationClip>("assets/animationclip/itemshipopendoors.anim");
 
             shipAnimator.Rebind();
-        }
-
-        public static void AdjustShipPosition(string _level)
-        {
-            
         }
     }
 }

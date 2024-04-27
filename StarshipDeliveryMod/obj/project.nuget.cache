@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WchNLbk5LIhx/5EVonGECswTBVmtDuV+aEo7WLdI8Pe3KsyysMtGcO02i8bd95t8AAHk+9CqhTfHk/v+z/PG6g==",
+  "dgSpecHash": "0lISpPtln7Pr8XB4DS0G0O1MmvTigZ1Zi6dkLgSFy3IkVisnfRoZjaY4EUWsMqYB7BOcxUiiOEDEKLCxLfFoqA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Valentin\\Documents\\Projets\\Modding\\LethalCompany\\StarshipDeliveryMod\\StarshipDeliveryMod\\StarshipDeliveryMod.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,7 @@
     "C:\\Users\\Valentin\\.nuget\\packages\\bepinex.core\\5.4.21\\bepinex.core.5.4.21.nupkg.sha512",
     "C:\\Users\\Valentin\\.nuget\\packages\\bepinex.plugininfoprops\\2.1.0\\bepinex.plugininfoprops.2.1.0.nupkg.sha512",
     "C:\\Users\\Valentin\\.nuget\\packages\\harmonyx\\2.7.0\\harmonyx.2.7.0.nupkg.sha512",
-    "C:\\Users\\Valentin\\.nuget\\packages\\lethalcompany.gamelibs.steam\\50.0.0-beta.3-ngd.0\\lethalcompany.gamelibs.steam.50.0.0-beta.3-ngd.0.nupkg.sha512",
+    "C:\\Users\\Valentin\\.nuget\\packages\\lethalcompany.gamelibs.steam\\50.0.1-ngd.0\\lethalcompany.gamelibs.steam.50.0.1-ngd.0.nupkg.sha512",
     "C:\\Users\\Valentin\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Valentin\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Valentin\\.nuget\\packages\\mono.cecil\\0.11.4\\mono.cecil.0.11.4.nupkg.sha512",
