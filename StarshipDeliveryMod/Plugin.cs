@@ -15,7 +15,7 @@ namespace StarshipDeliveryMod
     {
         private const string modGUID = "Laventin.StarshipDeliveryMod";
         private const string modName = "StarshipDelivery";
-        private const string modVersion = "1.0.1";
+        private const string modVersion = "1.0.2";
 
         private readonly Harmony harmony = new(modGUID);
 

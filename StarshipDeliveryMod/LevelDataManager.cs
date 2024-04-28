@@ -31,7 +31,15 @@ public class LevelDataManager
 
     public static LevelData_Unity GetLevelDatas(string _levelName)
     {
-        return LevelDataDict[_levelName];
+        if(LevelDataDict.ContainsKey(_levelName))
+        {
+            return LevelDataDict[_levelName];
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
     public class LandingPosition

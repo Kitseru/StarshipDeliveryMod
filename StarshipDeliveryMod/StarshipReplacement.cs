@@ -17,11 +17,9 @@ namespace StarshipDeliveryMod
             {
                 if (child.TryGetComponent<Renderer>(out Renderer renderer))
                     renderer.enabled = false;
-                    StarshipDelivery.mls.LogInfo("Component Renderer from " + child.name + " disabled");
 
                 if (child.TryGetComponent<Light>(out Light light))
                     light.enabled = false;
-                    StarshipDelivery.mls.LogInfo("Component Light from " + child.name + " disabled");
             }
 
             // Add Starship Prefab
@@ -81,6 +79,8 @@ namespace StarshipDeliveryMod
 
             //Change Animation Clips
             ReplaceStarshipAnimations(_droneShip);
+
+            StarshipDelivery.mls.LogInfo("Ship replacement is complete");
         }
 
         private static void ReplaceStarshipAnimations(GameObject _droneShip)
