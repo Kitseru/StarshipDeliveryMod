@@ -19,7 +19,7 @@ namespace StarshipDeliveryMod.Patches
             {
                 __instance.transform.parent.transform.localPosition = currentLevelDatas.landingPosition;
                 __instance.transform.parent.transform.localRotation = Quaternion.Euler(currentLevelDatas.landingRotation);
-                StarshipDelivery.mls.LogInfo("current level : " + currentLevelDatas.levelName + " ------------> changing ship position and rotation to fit Starship size at : " + currentLevelDatas.landingPosition + " - " + currentLevelDatas.landingRotation);
+                StarshipDelivery.mls.LogInfo("current level : " + currentLevelDatas.levelName + " -> changing ship position and rotation to fit Starship size at : " + currentLevelDatas.landingPosition + " - " + currentLevelDatas.landingRotation);
             }
             else
             {

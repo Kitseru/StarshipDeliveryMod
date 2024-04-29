@@ -77,6 +77,10 @@ namespace StarshipDeliveryMod
             //Resize NavMeshObstacle
             _droneShip.GetComponent<NavMeshObstacle>().size = new Vector3(8.5f, 8.5f, 6.46f);
 
+            //Change music box song
+            _droneShip.transform.Find("Music").GetComponent<AudioSource>().clip = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/itemdropship_near_starshipversion.wav");
+            _droneShip.transform.Find("Music/Music (1)").GetComponent<AudioSource>().clip = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/itemdropship_far_starshipversion.wav");
+
             //Change Animation Clips
             ReplaceStarshipAnimations(_droneShip);
 

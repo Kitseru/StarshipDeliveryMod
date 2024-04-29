@@ -29,7 +29,7 @@ public class LevelDataManager
         }
     }
 
-    public static LevelData_Unity GetLevelDatas(string _levelName)
+    public static LevelData_Unity? GetLevelDatas(string _levelName)
     {
         if(LevelDataDict.ContainsKey(_levelName))
         {
