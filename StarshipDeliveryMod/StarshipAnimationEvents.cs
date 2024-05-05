@@ -90,7 +90,7 @@ public class StarshipAnimationEvents : MonoBehaviour
 
     void SonicBoomSFX()
     {
-        if(audioSrc != null)
+        if(audioSrc != null && ConfigSettings.enableSonicBoom?.Value == true)
         {
             audioSrc.spatialBlend= 0.2f;
             audioSrc.PlayOneShot(sonicBoomSFX);

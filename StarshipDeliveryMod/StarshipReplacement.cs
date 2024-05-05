@@ -8,11 +8,11 @@ namespace StarshipDeliveryMod
 {
     internal class StarshipReplacement : MonoBehaviour
     {
-        public static void ReplaceStarshipModel(GameObject _droneShip)
+        public static void ReplaceStarshipModel(GameObject _dropShip)
         {
             // Hide Original DroneShip
             StarshipDelivery.mls.LogInfo("Ship replacement has begun");
-            Transform[] children = _droneShip.transform.GetChild(0).GetComponentsInChildren<Transform>();
+            Transform[] children = _dropShip.transform.GetChild(0).GetComponentsInChildren<Transform>();
             foreach(Transform child in children)
             {
                 if (child.TryGetComponent<Renderer>(out Renderer renderer))
@@ -23,16 +23,16 @@ namespace StarshipDeliveryMod
             }
 
             // Add Starship Prefab
-            GameObject newShipObject = Instantiate(StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipmodel.prefab"), Vector3.zero, Quaternion.identity, _droneShip.gameObject.transform);
+            GameObject newShipObject = Instantiate(StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipmodel.prefab"), Vector3.zero, Quaternion.identity, _dropShip.gameObject.transform);
             newShipObject.name = "StarshipModel";
             newShipObject.transform.localPosition = new Vector3(0, 0, -1.4f);
             newShipObject.transform.localRotation = Quaternion.Euler(180, 90, 90);
             newShipObject.transform.localScale = new Vector3(2, 2, 2);
 
             //Move Item Spawn Positions
-            Transform[] spawnPositions = new Transform[_droneShip.transform.Find("ItemSpawnPositions").childCount];
+            Transform[] spawnPositions = new Transform[_dropShip.transform.Find("ItemSpawnPositions").childCount];
             for (int i = 0; i < spawnPositions.Length; i++)
-                spawnPositions[i] = _droneShip.transform.Find("ItemSpawnPositions").transform.GetChild(i);
+                spawnPositions[i] = _dropShip.transform.Find("ItemSpawnPositions").transform.GetChild(i);
 
             spawnPositions[0].localPosition = new Vector3(4.960f,1.185f,-0.141f);
             spawnPositions[1].localPosition = new Vector3(5.140f,0.509f,-0.141f);
@@ -40,19 +40,19 @@ namespace StarshipDeliveryMod
             spawnPositions[3].localPosition = new Vector3(5.058f,-1.069f,-0.141f);
 
             //Resize Triggers Colliders
-            _droneShip.transform.Find("ItemShip/Trigger").GetComponent<BoxCollider>().size = new Vector3(3f, 3f, 1f);
-            _droneShip.transform.Find("ItemShip/KillTrigger").GetComponent<BoxCollider>().size = new Vector3(2.8f, 2.8f, 1f);
+            _dropShip.transform.Find("ItemShip/Trigger").GetComponent<BoxCollider>().size = new Vector3(3f, 3f, 1f);
+            _dropShip.transform.Find("ItemShip/KillTrigger").GetComponent<BoxCollider>().size = new Vector3(2.8f, 2.8f, 1f);
 
             //Initialize ParticleSystems
             GameObject plumeFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/plumetrail.prefab");
-            GameObject plumeFxGo = Instantiate<GameObject>(plumeFx, _droneShip.transform.position, Quaternion.identity, _droneShip.transform);
+            GameObject plumeFxGo = Instantiate<GameObject>(plumeFx, _dropShip.transform.position, Quaternion.identity, _dropShip.transform);
             plumeFxGo.transform.name = "PlumeTrail";
             plumeFxGo.transform.localPosition = new Vector3(0, 0, -7.1f);
             plumeFxGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             plumeFxGo.transform.localScale = new Vector3(1, 1, 1);
 
             GameObject reentryFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/reentryfx.prefab");
-            GameObject reentryFxGo = Instantiate<GameObject>(reentryFx, _droneShip.transform.position, Quaternion.identity, _droneShip.transform);
+            GameObject reentryFxGo = Instantiate<GameObject>(reentryFx, _dropShip.transform.position, Quaternion.identity, _dropShip.transform);
             reentryFxGo.transform.name = "ReentryFX";
             reentryFxGo.transform.localPosition = new Vector3(-10.06f, 0, 17.75f);
             reentryFxGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -61,35 +61,33 @@ namespace StarshipDeliveryMod
             //Initialize ParticleSystems animation events
             GameObject landingFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshiplandingfx.prefab");
             GameObject liftoff = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipliftofffx.prefab");
-            Transform landingPos = _droneShip.transform.GetParent().Find("ItemShipLandingPosition").transform;
+            Transform landingPos = _dropShip.transform.GetParent().Find("ItemShipLandingPosition").transform;
 
-            StarshipAnimationEvents effect = _droneShip.AddComponent<StarshipAnimationEvents>();
+            //Add Custom Scripts
+            _dropShip.AddComponent<StarshipSoundManager>();
+            StarshipAnimationEvents effect = _dropShip.AddComponent<StarshipAnimationEvents>();
             effect.InitFX(landingFx, liftoff, landingPos);
 
             //Initialize BilboardSprites
-            _droneShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<RelativeSizeBillboardSprite>();
-            _droneShip.transform.Find("ReentryFX/ReentryGlow").gameObject.AddComponent<RelativeSizeBillboardSprite>();
+            _dropShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<RelativeSizeBillboardSprite>();
+            _dropShip.transform.Find("ReentryFX/ReentryGlow").gameObject.AddComponent<RelativeSizeBillboardSprite>();
 
-            _droneShip.transform.Find("StarshipModel/Engine.000/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
-            _droneShip.transform.Find("StarshipModel/Engine.001/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
-            _droneShip.transform.Find("StarshipModel/Engine.002/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
+            _dropShip.transform.Find("StarshipModel/Engine.000/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
+            _dropShip.transform.Find("StarshipModel/Engine.001/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
+            _dropShip.transform.Find("StarshipModel/Engine.002/ThrusterContainer/ThrusterFlame").gameObject.AddComponent<AxisBillboardSprite>();
 
             //Resize NavMeshObstacle
-            _droneShip.GetComponent<NavMeshObstacle>().size = new Vector3(8.5f, 8.5f, 6.46f);
-
-            //Change music box song
-            _droneShip.transform.Find("Music").GetComponent<AudioSource>().clip = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/itemdropship_near_starshipversion.wav");
-            _droneShip.transform.Find("Music/Music (1)").GetComponent<AudioSource>().clip = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/itemdropship_far_starshipversion.wav");
+            _dropShip.GetComponent<NavMeshObstacle>().size = new Vector3(8.5f, 8.5f, 6.46f);
 
             //Change Animation Clips
-            ReplaceStarshipAnimations(_droneShip);
+            ReplaceStarshipAnimations(_dropShip);
 
             StarshipDelivery.mls.LogInfo("Ship replacement is complete");
         }
 
-        private static void ReplaceStarshipAnimations(GameObject _droneShip)
+        private static void ReplaceStarshipAnimations(GameObject _dropShip)
         {
-            Animator shipAnimator = _droneShip.GetComponent<Animator>();
+            Animator shipAnimator = _dropShip.GetComponent<Animator>();
             AnimatorOverrideController animatorOverrideController = new AnimatorOverrideController(shipAnimator.runtimeAnimatorController);
             shipAnimator.runtimeAnimatorController = animatorOverrideController;
 

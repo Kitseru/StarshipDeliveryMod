@@ -10,6 +10,7 @@ namespace StarshipDeliveryMod.Patches
     public class StartOfRoundPatch
     {
         public static Action<Camera>? onCameraChange;
+        public static Action<bool>? onEnteringDungeon;
         public static Camera? CurrentCam {get; private set;}
         public static Dictionary<Camera, float> DefaultFarClipDict = [];
         private static List<string> scenesToExclude = new List<string> { "SampleSceneRelay", "ColdOpen1", "InitScene", "InitSceneLANMode", "InitSceneLaunchOptions", "MainMenu" };
@@ -39,10 +40,12 @@ namespace StarshipDeliveryMod.Patches
             if(CurrentCam?.transform.position.y < -100 && isFarPlaneIncreased)
             {
                 IncreaseCameraFarClip(false);
+                onEnteringDungeon?.Invoke(true);
             }
             else if(CurrentCam?.transform.position.y > -100 && !isFarPlaneIncreased)
             {
                 IncreaseCameraFarClip(true);
+                onEnteringDungeon?.Invoke(false);
             }
         }
 
