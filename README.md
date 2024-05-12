@@ -1,5 +1,5 @@
 # StarshipDeliveryMod
- Lethal Company Mod - Replace Droneship by Spacex's Starship
+ Lethal Company Mod - Replace Dropship by Spacex's Starship
  
 ---
  Features :
@@ -11,7 +11,8 @@
  ---
 Details :
  - Purchased items can be found inside a door on the bottom of the ship
- - When Starship enter atmosphere, a sonic bang can be heard everywhere in the map
+ - When Starship enter atmosphere, a sonic bang can be heard everywhere in the map (can be disabled in config)
+ - The Dropship music is have various distortion effects (can be disabled in config)
  - Because of the difference of size, I had to change the landing position on each map, it can be modified in a Config file inside the mod folder
 ---
 Other Infos :
