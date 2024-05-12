@@ -4,20 +4,19 @@ using HarmonyLib;
 using UnityEngine;
 using StarshipDeliveryMod;
 
-namespace StarshipDeliveryMod.Patches
-{
-    [HarmonyPatch(typeof(ItemDropship))]
-    internal class ItemDropshipPatch
-    { 
+namespace StarshipDeliveryMod.Patches;
 
-        [HarmonyPatch("Start")]
-        [HarmonyPostfix]
-        public static void StartPatch(ref ItemDropship __instance)
+[HarmonyPatch(typeof(ItemDropship))]
+internal class ItemDropshipPatch
+{ 
+
+    [HarmonyPatch("Start")]
+    [HarmonyPostfix]
+    public static void StartPatch(ref ItemDropship __instance)
+    {
+        if(StarshipDelivery.AutoReplace)
         {
-            if(StarshipDelivery.AutoReplace)
-            {
-                StarshipDelivery.InitStarshipReplacement(__instance);            
-            }
+            StarshipDelivery.InitStarshipReplacement(__instance);            
         }
     }
 }

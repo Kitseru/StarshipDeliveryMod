@@ -4,17 +4,19 @@ using UnityEngine;
 using Newtonsoft.Json;
 using StarshipDeliveryMod;
 
+namespace StarshipDeliveryMod;
 public class LevelDataManager
 {
     public static Dictionary<string, LevelData_Unity> LevelDataDict = [];
 
     public static void InitializeLevelDatas(string _textJSON)
     {
+        LevelDataDict.Clear();
         LevelDataList? levelDataList = JsonConvert.DeserializeObject<LevelDataList>(_textJSON);
 
         if(levelDataList == null)
         {
-            StarshipDelivery.mls.LogInfo("Failed to read convert JsonFile to a class");
+            StarshipDelivery.mls.LogInfo(">>> Failed to convert JsonFile into an object");
             return;
         }
 
@@ -39,34 +41,45 @@ public class LevelDataManager
         {
             return null;
         }
-
     }
-
-    public class LandingPosition
+    public static LevelDataList? GetStoredLevelDataList(string _textJSON)
     {
-        public float x { get; set; }
-        public float y { get; set; }
-        public float z { get; set; }
-    }
+        LevelDataList? levelDataList = JsonConvert.DeserializeObject<LevelDataList>(_textJSON);
 
-    public class LandingRotation
-    {
-        public float x { get; set; }
-        public float y { get; set; }
-        public float z { get; set; }
-    }
+        if(levelDataList == null)
+        {
+            Debug.Log(">>> Failed to convert JsonFile into an object");
+            return null;
+        }
 
-    public class LevelData
-    {
-        public string? levelName { get; set; }
-        public LandingPosition? landingPosition { get; set; }
-        public LandingRotation? landingRotation { get; set; }
+        return levelDataList;
     }
+}
 
-    public class LevelDataList
-    {
-        public List<LevelData>? levelDatas { get; set; }
-    }
+public class LandingPosition
+{
+    public float x { get; set; }
+    public float y { get; set; }
+    public float z { get; set; }
+}
+
+public class LandingRotation
+{
+    public float x { get; set; }
+    public float y { get; set; }
+    public float z { get; set; }
+}
+
+public class LevelData
+{
+    public string? levelName { get; set; }
+    public LandingPosition? landingPosition { get; set; }
+    public LandingRotation? landingRotation { get; set; }
+}
+
+public class LevelDataList
+{
+    public List<LevelData>? levelDatas { get; set; }
 }
 
 //Class that uses Vector3 instead of x y and z position as individual floats

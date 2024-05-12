@@ -6,7 +6,7 @@ using UnityEngine;
 //Used to size the reentry flare sprite dynamically relative to camera distance
 public class RelativeSizeBillboardSprite : MonoBehaviour
 {
-    public float sizeMultiplier = 0.003f;
+    public float sizeMultiplier = 0.0015f;
     private Camera? mainCamera;
 
 	void Start()
