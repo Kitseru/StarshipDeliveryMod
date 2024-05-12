@@ -13,7 +13,8 @@ Details :
  - Purchased items can be found inside a door on the bottom of the ship
  - When Starship enter atmosphere, a sonic bang can be heard everywhere in the map (can be disabled in config)
  - The Dropship music is have various distortion effects (can be disabled in config)
- - Because of the difference of size, I had to change the landing position on each map, it can be modified in a Config file inside the mod folder
+ - Because of the difference of size, I had to change the landing position on each map, it can be modified in a json Config file inside the mod folder
+ - A built in tool allows to test starship position on each map and save them in the json file. You must activate it in the Config file and press P in game to open it
 ---
 Other Infos :
 - It is recommended that the mod be installed by the entire team, in order to avoid position desynchronization. However, if you're okay with this, the game should still work if some have the mod and some don't.
