@@ -31,10 +31,13 @@ internal class CustomPositioningTool : MonoBehaviour
     private Transform? confirmPopup;
     private List<Transform> allPopups = new();
 
-    private Text? lockText;
-    private Text? rotateText;
-    private Text? tweakOpenText;
-    private Text? processText;
+    private GameObject? lockTip;
+    private GameObject? rotateTip;
+    private GameObject? tweakOpenTip;
+    private GameObject? processTip;
+
+    private Sprite[]? lockIcons;
+
     private Text? confirmInfosText;
 
     private InputField? posXField;
@@ -165,6 +168,12 @@ internal class CustomPositioningTool : MonoBehaviour
         {
             StarshipDelivery.mls.LogInfo(">>> Custom Positioning Tool on");
             dummyShip = Instantiate(dummyShipPrefab, Vector3.zero, Quaternion.identity);
+            Transform shipToScale = dummyShip.transform.Find("DummyShip/ItemShip");
+            
+            //To match size set in config
+            float newScale = shipToScale.localScale.x * (ConfigSettings.starshipSize.Value / 100);
+            shipToScale.localScale = new Vector3(newScale, newScale, newScale);
+
             canvas = Instantiate(canevasPrefab, Vector3.zero, Quaternion.identity).transform;
             canvas.gameObject.AddComponent<CustomPositioningToolEvents>();
             InitUI();
@@ -216,10 +225,13 @@ internal class CustomPositioningTool : MonoBehaviour
         allPopups.Add(choicePopup);
         allPopups.Add(confirmPopup);
 
-        lockText = tipsTexts.Find("Lock/Text").GetComponent<Text>();
-        rotateText = tipsTexts.Find("Rotate/Text").GetComponent<Text>();
-        tweakOpenText = tipsTexts.Find("TweakOpen/Text").GetComponent<Text>();
-        processText = tipsTexts.Find("Process/Text").GetComponent<Text>();
+        lockTip = tipsTexts.Find("Lock").gameObject;
+        rotateTip = tipsTexts.Find("Rotate").gameObject;
+        tweakOpenTip = tipsTexts.Find("TweakOpen").gameObject;
+        processTip = tipsTexts.Find("Process").gameObject;
+
+        lockIcons = [StarshipDelivery.Ressources.LoadAsset<Sprite>("assets/sprite/lockicon.png"), StarshipDelivery.Ressources.LoadAsset<Sprite>("assets/sprite/unlockicon.png")];
+
         confirmInfosText = confirmPopup.Find("ConfirmText").GetComponent<Text>();
 
         posXField = tweakMenu.Find("Pos_Layout/PosX_Layout/PosX_InputField").GetComponent<InputField>();
@@ -230,6 +242,9 @@ internal class CustomPositioningTool : MonoBehaviour
         rotYField = tweakMenu.Find("Rot_Layout/RotY_Layout/RotY_InputField").GetComponent<InputField>();
         rotZField = tweakMenu.Find("Rot_Layout/RotZ_Layout/RotZ_InputField").GetComponent<InputField>();
         
+        rotateTip.SetActive(false);
+        tweakOpenTip.SetActive(false);
+        processTip.SetActive(false);
         tweakMenu.gameObject.SetActive(false);
         choicePopup.gameObject.SetActive(false);
         confirmPopup.gameObject.SetActive(false);
@@ -244,17 +259,23 @@ internal class CustomPositioningTool : MonoBehaviour
 
             if(isShipPlaced)
             {
-                lockText.text = "[L] to Unlock";
-                rotateText.text = "[O] to Rotate";
-                tweakOpenText.text = "[ I ] to open Tweak Menu";
-                processText.text = "[K] to copy Json snippet to clipboard";
+                lockTip.transform.Find("Text").GetComponent<Text>().text = "L";
+                lockTip.transform.Find("KeyImage").gameObject.SetActive(false);
+                lockTip.transform.Find("Description").GetComponent<Text>().text = "Unlock";
+                lockTip.transform.Find("Image").GetComponent<Image>().sprite = lockIcons[0];
+                rotateTip.SetActive(true);
+                tweakOpenTip.SetActive(true);
+                processTip.SetActive(true);
             }
             else
             {
-                lockText.text = "[RMB] to Lock in place";
-                rotateText.text = "-";
-                tweakOpenText.text = "-";
-                processText.text = "-";
+                lockTip.transform.Find("Text").GetComponent<Text>().text = "";
+                lockTip.transform.Find("KeyImage").gameObject.SetActive(true);
+                lockTip.transform.Find("Description").GetComponent<Text>().text = "Lock";
+                lockTip.transform.Find("Image").GetComponent<Image>().sprite = lockIcons[1];
+                rotateTip.SetActive(false);
+                tweakOpenTip.SetActive(false);
+                processTip.SetActive(false);
             }
         }
         else
@@ -345,7 +366,7 @@ internal class CustomPositioningTool : MonoBehaviour
 
     void CheckForDuplicatesLevelNames()
     {
-        storedLevelDataList = LevelDataManager.GetStoredLevelDataList(StarshipDelivery.LevelDataConfig);
+        storedLevelDataList = LevelDataManager.GetLevelDataList(StarshipDelivery.LevelDataConfig);
 
         if(storedLevelDataList == null || storedLevelDataList.levelDatas == null) return;
 

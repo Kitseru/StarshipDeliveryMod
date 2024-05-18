@@ -42,7 +42,7 @@ public class LevelDataManager
             return null;
         }
     }
-    public static LevelDataList? GetStoredLevelDataList(string _textJSON)
+    public static LevelDataList? GetLevelDataList(string _textJSON)
     {
         LevelDataList? levelDataList = JsonConvert.DeserializeObject<LevelDataList>(_textJSON);
 

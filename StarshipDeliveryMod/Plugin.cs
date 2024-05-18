@@ -8,6 +8,9 @@ using StarshipDeliveryMod.Patches;
 using System.IO;
 using System.Reflection;
 using BepInEx.Configuration;
+using Unity.Properties;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace StarshipDeliveryMod;
 
@@ -16,7 +19,7 @@ public class StarshipDelivery : BaseUnityPlugin
 {
     private const string modGUID = "Laventin.StarshipDeliveryMod";
     private const string modName = "StarshipDelivery";
-    private const string modVersion = "1.0.3";
+    private const string modVersion = "1.1.1";
 
     private readonly Harmony harmony = new(modGUID);
 
@@ -39,7 +42,9 @@ public class StarshipDelivery : BaseUnityPlugin
         }
 
         mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-        mls.LogInfo(">>> Starship Delivery Mod loaded");
+        mls = Logger;
+
+        mls.LogInfo(">>> Starship Delivery Mod initialization...");
 
         string currentAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -47,30 +52,20 @@ public class StarshipDelivery : BaseUnityPlugin
         
         ConfigSettings.BindConfigSettings();
 
-        if (Ressources == null) {
-            mls.LogError(">>> Failed to load custom assets.");
-            return;
-        }
-
-        LevelDataConfigPath = Path.Combine(currentAssemblyLocation, "ShipPositionConfig.json");
-
-        try
+        if (Ressources == null)
         {
-            LevelDataConfig = File.ReadAllText(LevelDataConfigPath);
-        }
-        catch
-        {
-            mls.LogError(">>> Failed to load ShipPositionConfig.json");
-            return;
+            throw new InvalidDataException(">>> Failed to load custom assets");
         }
 
+        LevelDataConfig = InitializeShipPositionConfig();
         LevelDataManager.InitializeLevelDatas(LevelDataConfig);
+        mls.LogInfo(">>> ShipPositionConfig.json loaded");
 
         harmony.PatchAll(typeof(ItemDropshipPatch));
         harmony.PatchAll(typeof(StartOfRoundPatch));
         harmony.PatchAll(typeof(PlayerControllerBPatch));
 
-        mls = Logger;
+        mls.LogInfo(">>> Starship Delivery Mod initialized successfully !");
     }
 
     public static void InitStarshipReplacement(ItemDropship _itemDropShip)
@@ -89,6 +84,47 @@ public class StarshipDelivery : BaseUnityPlugin
         }
         
         StarshipReplacement.ReplaceStarshipModel(_itemDropShip.gameObject);
+    }
+
+    private string InitializeShipPositionConfig()
+    {
+        string originalPositionFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DefaultShipPositions.json");
+        string configFilePath = Path.Combine(Paths.ConfigPath, "ShipPositionConfig.json");
+        LevelDataConfigPath = configFilePath;
+
+        if(!File.Exists(configFilePath))
+        {
+            mls.LogInfo(">>> ShipPositionConfig.json created !");
+            string originalJsonText = File.ReadAllText(originalPositionFilePath);
+            File.WriteAllText(configFilePath, originalJsonText);
+            return originalJsonText;
+        }
+
+        LevelDataList? originalLevelDataList = LevelDataManager.GetLevelDataList(File.ReadAllText(originalPositionFilePath));
+        LevelDataList? configLevelDataList = LevelDataManager.GetLevelDataList(File.ReadAllText(configFilePath));
+
+        if(originalLevelDataList == null || configLevelDataList == null)
+        {
+            throw new InvalidDataException(">>> Invalid or missing ship position data");
+        }
+
+        List<LevelData> missingLevelData = originalLevelDataList.levelDatas.Where(originalData => !configLevelDataList.levelDatas.Any(configData => configData.levelName == originalData.levelName)).ToList();
+
+        if(missingLevelData.Count() == 0)
+        {
+            return File.ReadAllText(configFilePath);
+        }
+
+        foreach(LevelData level in missingLevelData)
+        {
+            mls.LogInfo($">>> Missing data for level {level.levelName} added in ShipPositionConfig.json");
+            configLevelDataList.levelDatas.Add(level);
+        }
+
+        string newJsonText = JsonConvert.SerializeObject(configLevelDataList, Formatting.Indented);
+        File.WriteAllText(configFilePath, newJsonText);
+
+        return newJsonText;
     }
 }
 
