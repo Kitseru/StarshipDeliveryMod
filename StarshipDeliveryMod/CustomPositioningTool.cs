@@ -414,8 +414,21 @@ internal class CustomPositioningTool : MonoBehaviour
     {
         string _jsonString = GenerateJsonFile();
         System.IO.File.WriteAllText(StarshipDelivery.LevelDataConfigPath, _jsonString);
-        StarshipDelivery.mls.LogInfo(">>> ShipPositionConfig.json overwrited successifully, reopen the game to see changes !");
+        StarshipDelivery.mls.LogInfo(">>> ShipPositionConfig.json overwrited successifully !");
         ExitPopup();
+
+        StarshipDelivery.LevelDataConfig = StarshipDelivery.InitializeShipPositionConfig();
+        LevelDataManager.InitializeLevelDatas(StarshipDelivery.LevelDataConfig);
+        
+        ItemDropship itemDropShip = GameObject.FindObjectOfType<ItemDropship>();
+
+        if (itemDropShip == null)
+        {
+            StarshipDelivery.mls.LogError("Could not override itemDropShip position. ItemDropShip is null!");
+            return;
+        }
+        
+        StarshipDelivery.SetDropShipPosition(itemDropShip);
     }
 
     void OpenPopup(GameObject _popup, bool _open)
