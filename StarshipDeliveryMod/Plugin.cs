@@ -68,25 +68,28 @@ public class StarshipDelivery : BaseUnityPlugin
         mls.LogInfo(">>> Starship Delivery Mod initialized successfully !");
     }
 
-    public static void InitStarshipReplacement(ItemDropship _itemDropShip)
-    {
+    public static void InitStarshipReplacement(ItemDropship _itemDropShip) {
+        SetDropShipPosition(_itemDropShip);
+        
+        StarshipReplacement.ReplaceStarshipModel(_itemDropShip.gameObject);
+    }
+
+    public static void SetDropShipPosition(ItemDropship itemDropShip) {
         //Change ship position to avoid penetrations with environment
-        LevelData_Unity currentLevelDatas = LevelDataManager.GetLevelDatas(_itemDropShip.gameObject.scene.name);
+        LevelData_Unity currentLevelDatas = LevelDataManager.GetLevelDatas(itemDropShip.gameObject.scene.name);
         if(currentLevelDatas != null)
         {
-            _itemDropShip.transform.parent.transform.position = currentLevelDatas.landingPosition;
-            _itemDropShip.transform.parent.transform.rotation = Quaternion.Euler(currentLevelDatas.landingRotation);
+            itemDropShip.transform.parent.transform.position = currentLevelDatas.landingPosition;
+            itemDropShip.transform.parent.transform.rotation = Quaternion.Euler(currentLevelDatas.landingRotation);
             mls.LogInfo(">>> current level : " + currentLevelDatas.levelName + " -> changing ship position and rotation to fit Starship size at : " + currentLevelDatas.landingPosition + " - " + currentLevelDatas.landingRotation);
         }
         else
         {
             mls.LogInfo(">>> ShipPositionConfig.json don't contain datas for this level, default ship position will be used");
         }
-        
-        StarshipReplacement.ReplaceStarshipModel(_itemDropShip.gameObject);
     }
 
-    private string InitializeShipPositionConfig()
+    public static string InitializeShipPositionConfig()
     {
         string originalPositionFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DefaultShipPositions.json");
         string configFilePath = Path.Combine(Paths.ConfigPath, "ShipPositionConfig.json");
