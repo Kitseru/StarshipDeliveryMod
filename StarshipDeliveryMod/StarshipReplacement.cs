@@ -60,12 +60,12 @@ internal class StarshipReplacement : MonoBehaviour
         //Initialize ParticleSystems animation events
         GameObject landingFx = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshiplandingfx.prefab");
         GameObject liftoff = StarshipDelivery.Ressources.LoadAsset<GameObject>("assets/prefabs/starshipliftofffx.prefab");
-        Transform landingPos = _dropShip.transform.GetParent().Find("ItemShipLandingPosition").transform;
+        GameObject rootObject = _dropShip.transform.GetParent().Find("ItemShipLandingPosition").gameObject;
 
         //Add Custom Scripts
         _dropShip.AddComponent<StarshipSoundManager>();
         StarshipAnimationEvents effect = _dropShip.AddComponent<StarshipAnimationEvents>();
-        effect.InitFX(landingFx, liftoff, landingPos);
+        effect.InitFX(landingFx, liftoff, rootObject);
 
         //Initialize BilboardSprites
         _dropShip.transform.Find("ReentryFX/ReentryLens").gameObject.AddComponent<RelativeSizeBillboardSprite>();

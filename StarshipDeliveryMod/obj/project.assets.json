@@ -53,7 +53,7 @@
           }
         }
       },
-      "LethalCompany.GameLibs.Steam/50.0.1-ngd.0": {
+      "LethalCompany.GameLibs.Steam/56.0.1-ngd.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.JSON": "13.0.3",
@@ -783,14 +783,14 @@
         "logo_mini.png"
       ]
     },
-    "LethalCompany.GameLibs.Steam/50.0.1-ngd.0": {
-      "sha512": "QMDEyc7ahSYyzUhq7mwx4QWAfZM/aNjOaZsK+AmM4KHRsostWjsWg28q04vTmDWf9IYW0KFGvLNjMiyjH3745Q==",
+    "LethalCompany.GameLibs.Steam/56.0.1-ngd.0": {
+      "sha512": "wzePk10ngsSmQTjd5CnYykD8KTTNZoGXN8Npr00VgmhRm1gisG0ZcJbdvXRaeREtNv8pLbLkThk+He4xXOm6YQ==",
       "type": "package",
-      "path": "lethalcompany.gamelibs.steam/50.0.1-ngd.0",
+      "path": "lethalcompany.gamelibs.steam/56.0.1-ngd.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lethalcompany.gamelibs.steam.50.0.1-ngd.0.nupkg.sha512",
+        "lethalcompany.gamelibs.steam.56.0.1-ngd.0.nupkg.sha512",
         "lethalcompany.gamelibs.steam.nuspec",
         "ref/netstandard2.1/AmazingAssets.TerrainToMesh.dll",
         "ref/netstandard2.1/Assembly-CSharp-firstpass.dll",
@@ -2875,7 +2875,7 @@
     "C:\\Users\\Valentin\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.1.1",
+    "version": "1.1.2",
     "restore": {
       "projectUniqueName": "C:\\Users\\Valentin\\Documents\\Projets\\Modding\\LethalCompany\\StarshipDeliveryMod\\StarshipDeliveryMod\\StarshipDeliveryMod.csproj",
       "projectName": "Laventin.StarshipDeliveryMod",

@@ -9,7 +9,7 @@ public class StarshipAnimationEvents : MonoBehaviour
 {
     private GameObject landingFxPrefab = null!;
     private GameObject liftoffFxPrefab = null!;
-    private Vector3 spawnPosition;
+    private GameObject? rootObject;
 
     private AudioSource? audioSrc;
     private AudioClip? landingSFX;
@@ -23,25 +23,25 @@ public class StarshipAnimationEvents : MonoBehaviour
         landingSFX = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/starshiplanding.wav");
         liftoffSFX = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/starshipliftoff.wav");
         sonicBoomSFX = StarshipDelivery.Ressources.LoadAsset<AudioClip>("assets/audioclip/sonicboom.wav");
+
     }
 
-    public void InitFX(GameObject _landingFxPrefab, GameObject _liftoffFxPrefab, Transform _liftoffPosition)
+    public void InitFX(GameObject _landingFxPrefab, GameObject _liftoffFxPrefab, GameObject _rootObject)
     {
         landingFxPrefab = _landingFxPrefab;
         liftoffFxPrefab = _liftoffFxPrefab;
-        spawnPosition = _liftoffPosition.position + new Vector3(0, -1.42f, 0);
-
+        rootObject = _rootObject;
     }
 
     public void Landing()
     {
-        GameObject effect = Instantiate<GameObject>(landingFxPrefab, spawnPosition, Quaternion.Euler(-90, 0, 0));
+        GameObject effect = Instantiate<GameObject>(landingFxPrefab, rootObject.transform.position, Quaternion.Euler(-90, 0, 0));
         Destroy(effect, 8f);
     }
 
     public void Liftoff()
     {
-        GameObject effect = Instantiate<GameObject>(liftoffFxPrefab, spawnPosition, Quaternion.Euler(-90, 0, 0));
+        GameObject effect = Instantiate<GameObject>(liftoffFxPrefab, rootObject.transform.position, Quaternion.Euler(-90, 0, 0));
         Destroy(effect, 8f);
     }
 
