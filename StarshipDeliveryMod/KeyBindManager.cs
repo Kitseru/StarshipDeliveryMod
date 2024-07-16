@@ -17,6 +17,13 @@ internal class KeyBindManager
         {
             customActionMap = new InputActionMap("CustomStarshipDeliveryMod");
         }
+
+        InputAction existingAction = customActionMap.FindAction(_inputName);
+        if (existingAction != null)
+        {
+            Debug.LogWarning($"InputAction with the name {_inputName} already exists.");
+            return;
+        }
         customActionMap.Disable();
 
         InputAction newAction = customActionMap.AddAction(_inputName);
@@ -33,6 +40,15 @@ internal class KeyBindManager
         {
             customActionMap = new InputActionMap("CustomStarshipDeliveryMod");
         }
+
+        InputAction existingAction = customActionMap.FindAction(_inputName);
+        if (existingAction != null)
+        {
+            Debug.LogWarning($"InputAction with the name {_inputName} already exists.");
+            return existingAction;
+        }
+
+
         customActionMap.Disable();
 
         InputAction newInputAction = customActionMap.AddAction(_inputName);

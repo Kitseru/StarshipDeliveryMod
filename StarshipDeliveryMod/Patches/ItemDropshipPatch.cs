@@ -19,4 +19,14 @@ internal class ItemDropshipPatch
             StarshipDelivery.InitStarshipReplacement(__instance);            
         }
     }
+
+    [HarmonyPatch("Update")]
+    [HarmonyPostfix]
+    public static void UpdatePatch(ref ItemDropship __instance)
+    {
+        if (__instance.deliveringVehicle && !__instance.untetheredVehicle)
+        {
+            __instance.shipTimer -= Time.deltaTime;
+        }
+    }
 }

@@ -99,6 +99,7 @@ internal class StarshipReplacement : MonoBehaviour
         animatorOverrideController["ItemShipLand"] = StarshipDelivery.Ressources.LoadAsset<AnimationClip>("assets/animationclip/itemshipland.anim");
         animatorOverrideController["ItemShipLeave"] = StarshipDelivery.Ressources.LoadAsset<AnimationClip>("assets/animationclip/itemshipleave.anim");
         animatorOverrideController["ItemShipOpenDoors"] = StarshipDelivery.Ressources.LoadAsset<AnimationClip>("assets/animationclip/itemshipopendoors.anim");
+        animatorOverrideController["ItemShipDeliverTruck"] = StarshipDelivery.Ressources.LoadAsset<AnimationClip>("assets/animationclip/itemshipdelivertruck.anim");
 
         shipAnimator.Rebind();
     }

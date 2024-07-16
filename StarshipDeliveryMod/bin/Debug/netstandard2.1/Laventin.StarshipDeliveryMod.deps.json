@@ -12,7 +12,7 @@
           "BepInEx.Analyzers": "1.0.8",
           "BepInEx.Core": "5.4.21",
           "BepInEx.PluginInfoProps": "2.1.0",
-          "LethalCompany.GameLibs.Steam": "50.0.1-ngd.0",
+          "LethalCompany.GameLibs.Steam": "56.0.1-ngd.0",
           "UnityEngine.Modules": "2022.3.9"
         },
         "runtime": {
@@ -47,7 +47,7 @@
           }
         }
       },
-      "LethalCompany.GameLibs.Steam/50.0.1-ngd.0": {
+      "LethalCompany.GameLibs.Steam/56.0.1-ngd.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "UnityEngine.Modules": "2022.3.9"
@@ -410,12 +410,12 @@
       "path": "harmonyx/2.7.0",
       "hashPath": "harmonyx.2.7.0.nupkg.sha512"
     },
-    "LethalCompany.GameLibs.Steam/50.0.1-ngd.0": {
+    "LethalCompany.GameLibs.Steam/56.0.1-ngd.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QMDEyc7ahSYyzUhq7mwx4QWAfZM/aNjOaZsK+AmM4KHRsostWjsWg28q04vTmDWf9IYW0KFGvLNjMiyjH3745Q==",
-      "path": "lethalcompany.gamelibs.steam/50.0.1-ngd.0",
-      "hashPath": "lethalcompany.gamelibs.steam.50.0.1-ngd.0.nupkg.sha512"
+      "sha512": "sha512-wzePk10ngsSmQTjd5CnYykD8KTTNZoGXN8Npr00VgmhRm1gisG0ZcJbdvXRaeREtNv8pLbLkThk+He4xXOm6YQ==",
+      "path": "lethalcompany.gamelibs.steam/56.0.1-ngd.0",
+      "hashPath": "lethalcompany.gamelibs.steam.56.0.1-ngd.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
